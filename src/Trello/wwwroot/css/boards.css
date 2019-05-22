@@ -1,0 +1,205 @@
+header {
+    background-color: #026aa7;
+}
+
+.boards-main {
+    display: grid;
+    height: 1hv;
+    grid-template-columns: repeat(12, 1fr);
+    margin-top: 5%;
+}
+
+.boards-menu {
+    grid-column: 1 / 3;
+}
+
+#boards-grid {
+    grid-column: 3 / 11;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 100px;
+}
+
+.board-link {
+    display: contents;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.board-link:hover > .board-link-content {
+    filter: brightness(80%);
+}
+
+.board-link-content {
+    border-radius: 3px;
+    padding: 15px;
+    position: relative;
+    font-weight: 700;
+}
+
+.board-link-star {
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    right: 0;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: .25s ease;
+}
+
+.board-link:hover .board-link-star {
+    width: 100%;
+    left: 0;
+}
+
+.board-link-star > div {
+    font-size: 20px;
+    position: absolute;
+    top: 75%;
+    left: 90%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}   
+
+.board-link-star-selected {
+    color: goldenrod;
+}
+
+#board-create {
+    border-radius: 3px;
+    padding: 15px;
+    position: relative;
+    font-weight: 700;
+    color: #6b778c;
+    background-color: rgba(9,30,66,.08);
+    cursor: pointer;
+}
+
+#board-create:hover {
+    filter: brightness(80%);
+}
+
+.board-create-overlay {
+    position: fixed;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(10,10,10,.7);
+    overflow: hidden;
+    width: 100%;
+    height:0;
+    transition: .25s ease;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-create-overlay-show {
+    bottom: 0;
+    height: 100vh;
+}
+
+#board-create-content {
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(3, 32px) auto;
+    grid-template-areas: 
+        "t t t t t t t t t m s f"
+        "t t t t t t t t t v g b"
+        "t t t t t t t t t r o p"
+        "c c c c c c c c c c c c";
+}
+
+#board-create-title {
+    grid-area: t;
+    border-radius: 3px;
+}
+
+#board-create-title > input {
+    background-color: hsla(0,0%,100%,.3);
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+    font-size: 13px;
+    height: 30px;
+    width: calc(100% - 13px);
+    margin: 15px 5px 0 5px;
+    color: white;
+    font-weight: 600;
+    padding-left: 3px;
+}
+
+#board-create-title > input:hover, #board-create-title > input:focus {
+    background-color: hsla(0,0%,100%,.5);
+}
+
+#board-create-mountains {
+    grid-area: m;
+}
+
+#board-create-space {
+    grid-area: s;
+}
+
+#board-create-movie {
+    grid-area: f;
+}
+
+#board-create-paris {
+    grid-area: v;
+}
+
+#board-create-red {
+    grid-area: r;
+}
+
+#board-create-blue {
+    grid-area: b;
+}
+
+#board-create-green {
+    grid-area: g;
+}
+
+#board-create-orange {
+    grid-area: o;
+}
+
+#board-create-purple {
+    grid-area: p;
+}
+
+#board-create-button {
+    grid-area: c;
+}
+
+.background-button {
+    min-width: 32px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+}
+
+.background-button:hover {
+    filter: brightness(70%);
+}
+
+#board-create-button {
+    display: flex;
+    justify-content: center;
+}
+
+#board-create-button > .styled-button {
+    color: white;
+}

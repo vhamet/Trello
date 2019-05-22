@@ -1,0 +1,61 @@
+@model Trello.Models.BoardViewModel
+@section Styles {
+    <link href="@Url.Content("~/css/boards.css")" rel="stylesheet" type="text/css" />
+}
+@{
+    ViewData["Title"] = "Boards";
+}
+
+<div class="boards-main">
+    <div class="boards-menu">
+        MENU
+    </div>
+    <div id="boards-grid">
+        @for (int i = 0; i < Model.Boards.Count; i++)
+        {
+            <a class="board-link" href="/Board/">
+                <div class="board-link-content @Model.Boards[i].BackgroundClass">
+                    <div>
+                        @Model.Boards[i].Name
+                    </div>
+                    <div class="board-link-star">
+                        <div class="far fa-star @Model.Boards[i].SelectedClass" data-id="@Model.Boards[i].Id"></div> 
+                    </div>
+                </div>
+            </a>
+        }
+
+        <div id="board-create">
+            Create new board...
+        </div>
+    </div>
+
+    <div class="board-create-overlay">
+        <div id="board-create-content">
+            <div id="board-create-title" class="background-mountains">
+                <input id="board-create-title-input" placeholder="Add board title"/>
+            </div>
+            <button id="board-create-mountains" class="background-mountains background-button" data-background="mountains">
+                <span id="board-create-background-selected" class="fas fa-check"></span>
+            </button>
+            <button id="board-create-space" class="background-space background-button" data-background="space"></button>
+            <button id="board-create-paris" class="background-paris background-button" data-background="paris"></button>
+            <button id="board-create-movie" class="background-movie background-button" data-background="movie"></button>
+            <button id="board-create-green" class="background-green background-button" data-background="green"></button>
+            <button id="board-create-blue" class="background-blue background-button" data-background="blue"></button>
+            <button id="board-create-red" class="background-red background-button" data-background="red"></button>
+            <button id="board-create-orange" class="background-orange background-button" data-background="orange"></button>
+            <button id="board-create-purple" class="background-purple background-button" data-background="purple"></button>
+            <div id="board-create-button">
+                <button id="board-create-button-cancel" class="styled-button background-blue">Cancel</button>
+                <button id="board-create-button-create" class="styled-button background-blue" disabled>Create</button>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/js/boards.js")" asp-append-version="true"></script>
+}
