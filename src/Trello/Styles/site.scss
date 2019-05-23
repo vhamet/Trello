@@ -1,0 +1,67 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  margin: 0;
+}
+
+.background-blue {
+  background-color: rgb(0, 121, 191);
+}
+
+.background-orange {
+  background-color: rgb(210, 144, 52);
+}
+
+.background-green {
+  background-color: rgb(81, 152, 57);
+}
+
+.background-red {
+  background-color: rgb(176, 70, 50);
+}
+
+.background-purple {
+  background-color: rgb(137, 96, 158);
+}
+
+.background-space {
+  background-image: url(https://images.unsplash.com/photo-1558158539-226f4a45f7b3?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9);
+  background-size: cover;
+}
+
+.background-paris {
+  background-image: url(https://www.discoverwalks.com/blog/wp-content/uploads/2014/12/thingstodoinparisatnight.jpg);
+  background-size: cover;
+}
+
+.background-movie {
+  background-image: url(https://dcmp.org/images/learning_center/34/34-1.jpg);
+  background-size: cover;
+}
+
+.background-mountains {
+  background-image: url(https://images.unsplash.com/photo-1558098115-228ee6fbc761?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9);
+  background-size: cover;
+}
+
+.styled-button {
+  display: inline-block;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 8px 4px 0 0;
+  padding: 6px 12px;
+  text-align: center;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(80%);
+  }
+  
+  &:enabled:hover {
+    filter: brightness(85%);
+  }
+}
