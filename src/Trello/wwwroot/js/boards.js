@@ -1,13 +1,13 @@
 // Star click handling: set/unset favorite
 const stars = document.querySelectorAll('.board-link-star > div');
 
-async function updateFavoriteAsync(id) {
+async function updateFavoriteAsync(id, isFavorite) {
   const data = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: id,
+    body: JSON.stringify({ id, isFavorite }),
   };
   const response = await fetch('/Boards/UpdateFavoriteAsync', data);
   const success = await response.json();
@@ -18,7 +18,7 @@ async function updateFavoriteAsync(id) {
 function handleStarClick(e) {
   e.preventDefault();
 
-  updateFavoriteAsync(this.dataset.id)
+  updateFavoriteAsync(this.dataset.id, !this.classList.contains('board-link-star-selected'))
     .then((success) => {
       if (success) {
         this.classList.toggle('board-link-star-selected');

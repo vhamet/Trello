@@ -37,7 +37,6 @@ namespace Trello
             var connection = Configuration["connectionStrings:TRELLOConnection"];
             services.AddDbContext<TrelloDbContext>(options => options.UseSqlServer(connection));
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

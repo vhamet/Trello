@@ -8,16 +8,16 @@ namespace Trello.Models
 {
     public class BoardService
     {
-        private TrelloDbContext _context;
+        private TrelloDbContext db;
 
         public BoardService(TrelloDbContext context)
         {
-            _context = context;
+            db = context;
         }
 
         public List<Board> GetAllBoards()
         {
-            var boards = _context.tblBoard.ToList();
+            var boards = db.tblBoard.ToList();
             return boards;
         }  
 
@@ -25,8 +25,8 @@ namespace Trello.Models
         {
             try
             {
-                _context.tblBoard.Add(board);
-                _context.SaveChanges();
+                db.tblBoard.Add(board);
+                db.SaveChanges();
                 
                 return board;
             }
@@ -35,20 +35,20 @@ namespace Trello.Models
                 throw e;
                 // return null;
             }
-        } 
+        }
 
-        public bool UpdateFavorite(int id)
+        public bool UpdateIsFavorite(int id, bool value)
         {
             try
             {
-                var board = _context.tblBoard.FirstOrDefault(b => b.Id == id);
-                if (board != null)
+                var record = db.tblBoard.Find(id);
+                if (record != null)
                 {
-                    board.isFavorite = !board.isFavorite;
-                    return _context.SaveChanges() == 1;
+                    record.isFavorite = value;
+                    return db.SaveChanges() == 1;
                 }
 
-                return false;
+                return false;   
             }
             catch (Exception e)
             {

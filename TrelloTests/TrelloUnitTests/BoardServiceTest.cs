@@ -28,12 +28,12 @@ namespace TrelloUnitTests
         }
         
         [Fact]
-        public void UpdateFavorite_should_switch_isFavorite_value()
+        public void UpdateIsFavorite_should_update_isFavorite()
         {
            var data = new List<Board>
             {
-                new Board { Id = 1, isFavorite = true },
-                new Board { Id = 2, isFavorite = false },
+                new Board { Id = 1, isFavorite = false },
+                new Board { Id = 2, isFavorite = true },
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Board>>();
@@ -46,11 +46,11 @@ namespace TrelloUnitTests
             mockContext.Setup(c => c.tblBoard).Returns(mockSet.Object);
 
             var service = new BoardService(mockContext.Object);
-            service.UpdateFavorite(1);
-            service.UpdateFavorite(2);
+            service.UpdateIsFavorite(1, true);
+            service.UpdateIsFavorite(2, false);
 
-            Assert.False(data.First(b => b.Id == 1).isFavorite);
-            Assert.True(data.First(b => b.Id == 2).isFavorite);
+            Assert.True(data.First(b => b.Id == 1).isFavorite);
+            Assert.False(data.First(b => b.Id == 2).isFavorite);
         }
 
         [Fact]

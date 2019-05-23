@@ -23,9 +23,9 @@ namespace Trello.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateFavoriteAsync([FromBody] int id)
+        public JsonResult UpdateFavoriteAsync([FromBody] Board board)
         {
-            var success = new BoardService(context).UpdateFavorite(id);
+            var success = new BoardService(context).UpdateIsFavorite(board.Id, board.isFavorite);
             return Json(success);
         }
 
