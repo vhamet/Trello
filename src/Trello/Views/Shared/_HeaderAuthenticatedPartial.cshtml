@@ -2,13 +2,13 @@
   <div class="flex-container">
     <a href="/"><span class="fas fa-home header-button"></span></a>
     <a href="/Boards/Index">
-        <span class="header-button boards-link">
-          <i class="fas fa-th-large"></i>
-          <span class="boards-link-label">Boards</span> 
-        </span>
+      <span class="header-button boards-link">
+        <i class="fas fa-th-large"></i>
+        <span class="boards-link-label">Boards</span>
+      </span>
     </a>
     <div>
-      <input type="text" class="header-search">
+      <input type="text" class="header-search" />
       <span class="fas fa-search header-search-icon"></span>
     </div>
   </div>
@@ -16,19 +16,82 @@
     <a href="/"><span></span></a>
   </div>
   <div class="flex-container">
-    <a href="/"><span class="fas fa-plus header-button"></span></a>
-    <a href="/"><span class="fas fa-info-circle header-button"></span></a>
-    <a href="/"><span class="fas fa-bell header-button"></span></a>
-    @if (User.Identity.IsAuthenticated)
-    {
-      <form a method="post" asp-controller="Authentication" asp-action="Logout">
-            <button type="submit" class="btn btn-lg btn-danger">Yes</button>
-            <a asp-action="Cancel" class="btn btn-lg btn-warning">Cancel</a>
-        </form>
-    }
-    else
-    {
-      <a href="/Authentication/Login"><span class="header-account">VH</span></a>
-    }
+    <span
+      class="fas fa-plus header-button link-menu"
+      data-content="create"
+    ></span>
+    <span
+      class="fas fa-info-circle header-button link-menu"
+      data-content="informations"
+    ></span>
+    <span
+      class="fas fa-bell header-button link-menu"
+      data-content="alert"
+    ></span>
+    <span id="header-account" class="link-menu" data-content="account">
+      @User.Claims.FirstOrDefault(c => c.Type ==
+      System.Security.Claims.ClaimTypes.Name)?.Value[0]
+    </span>
   </div>
 </nav>
+<div class="header-dropdown">
+  <div class="header-dropdown-content content-create">
+    <div class="header-dropdown-content-header">
+      Create
+      <i class="close-dropdown fas fa-times"></i>
+    </div>
+    <a>
+      <div class="header-dropdown-content-title">Create board...</div>
+      <div>
+        A board is made up of cards ordered on lists. Use it to manage projects,
+        track information, or organize anything.
+      </div>
+    </a>
+    <a>
+      <div class="header-dropdown-content-title">Create team...</div>
+      <div>
+        A team is a group of boards and people. Use it to organize your company,
+        side hustle, family, or friends.
+      </div>
+    </a>
+    <a>
+      <div class="header-dropdown-content-title">
+        Create business team...
+      </div>
+      <div>
+        With Business Class your team has more security, administrative
+        controls, and unlimited Power-Ups.
+      </div>
+    </a>
+  </div>
+  <div class="header-dropdown-content content-informations">
+    <div class="header-dropdown-content-header">
+      Informations
+      <i class="close-dropdown fas fa-times"></i>
+    </div>
+  </div>
+  <div class="header-dropdown-content content-alert">
+    <div class="header-dropdown-content-header">
+      Alerts
+      <i class="close-dropdown fas fa-times"></i>
+    </div>
+  </div>
+  <div class="header-dropdown-content content-account">
+    <div class="header-dropdown-content-header">
+      @User.Claims.FirstOrDefault(c => c.Type ==
+      System.Security.Claims.ClaimTypes.Name)?.Value
+      <i class="close-dropdown fas fa-times"></i>
+    </div>
+    <div class="header-dropdown-content-title">
+      <form
+        a
+        method="post"
+        asp-controller="Authentication"
+        asp-action="Logout"
+        class="header-account"
+      >
+        <button type="submit" class="btn btn-lg btn-danger">Log out</button>
+      </form>
+    </div>
+  </div>
+</div>
