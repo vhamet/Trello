@@ -5,14 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | Trello</title>
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/header.css" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <link rel="stylesheet" href="~/css/header_authenticated.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="~/css/header.css" />
+    }
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     @RenderSection("Styles", false)
 </head>
 <body>
     <div>
         <header>
-            <partial name="_HeaderPartial" />
+            @if (User.Identity.IsAuthenticated)
+            {
+                <partial name="_HeaderAuthenticatedPartial" />
+            }
+            else
+            {
+                <partial name="_HeaderPartial" />
+            }
         </header>
 
         <main>

@@ -19,5 +19,6 @@ namespace Trello.Models
         }
 
         public virtual DbSet<Models.Board> tblBoard { get; set; }
+        public virtual DbSet<Models.User> tblUser { get; set; }
     }
 }

@@ -1,0 +1,1 @@
+header{background-color:#4bbf6b}#home{background-color:#4bbf6b;color:white;text-align:center;display:flex;flex-flow:column;height:calc(100vh - 40px);justify-content:center}#home h1{text-decoration:none;color:white;font-size:50px;font-weight:1000;margin:0}#home a{text-decoration:none;color:white;font-weight:700}#home a:hover{text-decoration:none;color:rgba(255,255,255,0.8)}

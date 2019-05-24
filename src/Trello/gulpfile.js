@@ -7,5 +7,5 @@ gulp.task('sass', () => gulp.src('Styles/**/*.scss')
   .pipe(gulp.dest('wwwroot/css')));
 
 gulp.task('sass:watch', () => {
-  gulp.watch('Styles/**/*.scss', ['sass']);
+  gulp.watch('Styles/**/*.scss', gulp.series('sass'));
 });

@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Trello.Models
 {
-    public class BoardViewModel
+    public class BoardsViewModel
     {
         public List<Board> Boards { get; set; }
 
-        public BoardViewModel(List<Board> boards)
+        public BoardsViewModel(List<Board> boards)
         {
             Boards = boards;
         }

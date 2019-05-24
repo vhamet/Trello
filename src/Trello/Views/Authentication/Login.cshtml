@@ -1,0 +1,64 @@
+@model Trello.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to Trello</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
+<body>
+    <main id="login-form">
+        <div class="flex-child">
+            <h1>Login to trello</h1>
+            <a href="/Authentication/Signup">or create an account</a>
+        </div>
+        @if (!ViewContext.ModelState.IsValid)
+        {
+            <div class="validation-summary">
+                <div asp-validation-summary="All"></div>
+            </div>
+        }
+        <form asp-action="Login" method="post">
+            <div>
+                <label for="username">Username <span class="light-label">(or email)</span></label>
+            </div>
+            <input type="text" class="input-form" id="username" name="username" asp-for="Username" />
+            <div>
+                <label for="password">Password</label>
+            </div>
+            <input type="password" class="input-form" id="password" name="password" asp-for="Password" />
+            <button  id="submit-login" type="submit">Log In</button>
+        </form>
+        <div id="login-google">
+            <span class="icon"></span>
+            <span>Log in with Google</span>
+        </div>
+        <div class="flex-child">
+            <a id="forgot-password">Forgot your password ?</a>
+        </div>
+        <iframe id="not-my-problem" src="https://giphy.com/embed/G5X63GrrLjjVK" width="399" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </main>
+    
+    <script>
+        const forgotPassword = document.getElementById('forgot-password');
+        const image = document.getElementById('not-my-problem');
+
+        function showImage(e) {
+            e.preventDefault();
+            image.style.height = '480px';
+            setTimeout(hideImage, 1200);
+        }
+
+        function hideImage() {
+            image.style.height = 0;
+        }
+
+        forgotPassword.addEventListener('click', showImage);
+    </script>
+</body>

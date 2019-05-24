@@ -1,0 +1,168 @@
+.flex-nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.1);
+    min-height: 40px;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+    > .flex-container {
+        flex: 1;
+        display: flex;
+
+        &:first-child > * {
+            margin-left: 4px;
+        }
+
+        &:last-child > * {
+            margin-right: 4px;
+        }
+    }
+
+    > div:last-child {
+        justify-content: flex-end;
+    }
+}
+
+.header-button {
+    display: inline-block;
+    min-width: 32px;
+    min-height: 32px;
+    line-height: 32px !important;
+    background: hsla(0,0%,100%,.3);
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;    
+    font-weight: 700;
+
+    &:hover {
+        background: hsla(0,0%,100%,.2);
+    }
+}
+
+span.boards-link {
+    min-width: 84px;
+    user-select: none;
+
+    > i {
+        margin-right: 6px;
+    }
+}
+
+
+input[type=text].header-search  {
+    display: inline-block;
+    background-color: hsla(0,0%,100%,.3);
+    border-radius: 3px;
+    border: none;
+    box-shadow: none;
+    font-size: 13px;
+    height: 30px;
+    min-height: 30px;
+    padding-right: 32px;
+    padding-left: 8px;
+    line-height: 19px;
+    transition: width .15s;
+    width: 145px;
+
+    &:focus {
+        width: 200px;
+        outline: none;
+        background-color: white;
+    }
+}
+
+span.header-search-icon {
+    position: relative;
+    right: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+div.header-logo {
+    display: content !important;
+
+    span {
+        display: block;
+        background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png);
+        background-size: 80px 30px;
+        cursor: pointer;
+        height: 30px;
+        width: 80px;
+        opacity: .5;
+        transition: opacity .1s ease;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+}
+
+.header-account {
+    display: inline-block;
+    color: #172b4d;
+    background-color: #dfe1e6;
+    border-radius: 25em;
+    line-height: 32px;
+    width: 32px;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+
+    &:hover {
+        background-color: #c0c1c4;
+    }
+    
+}
+
+@media all and (min-width: 1280px) {
+    input[type=text].header-search:focus {
+        width: 380px;
+    }
+}
+
+@media all and (max-width: 900px) {
+    input[type=text].header-search:focus {
+        width: 145px;
+    }
+}
+
+@media all and (max-width: 750px) {
+    span.boards-link-label {
+        display: none;
+    }
+
+    span.boards-link {
+        min-width: 32px;
+
+        > i {
+            margin-right: 0;
+        }
+    }
+
+    input[type=text].header-search {
+        display: none;
+    }
+
+    span.header-search-icon {
+        right: 0;
+        min-width: 32px;
+        min-height: 32px;
+        line-height: 32px !important;
+        background: hsla(0,0%,100%,.3);
+        border-radius: 3px;
+        text-align: center;
+        font-size: 14px;    
+        font-weight: 700;
+
+        &:hover {
+            background: hsla(0,0%,100%,.2);
+        }
+    }
+}

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Trello.Models;
 
 namespace Trello.Controllers
 {
+    [Authorize]
     public class BoardsController : Controller
     {
         private TrelloDbContext context;
@@ -19,7 +21,7 @@ namespace Trello.Controllers
         public IActionResult Index()
         {
             var data = new BoardService(context).GetAllBoards();
-            return View("Boards", new BoardViewModel(data));
+            return View("Boards", new BoardsViewModel(data));
         }
 
         [HttpPost]

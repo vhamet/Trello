@@ -1,0 +1,58 @@
+@model Trello.Models.SignupViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to trello</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/signup.css" />
+</head>
+<body>
+    <main id="signup-form">
+        <div class="flex-child">
+            <h1>Create a Trello account</h1>
+            <a href="/Authentication/Login">or sign in to your account</a>
+        </div>
+        <div class="validation-user">
+            <span id="usernameUsed">Username already used, please choose another one</span>
+            <span id="emailUsed">Email already used, please choose another one</span>
+            <span id="passwordInvalid">Password mismatch, please check confirmation</span>
+        </div>
+        @if (!ViewContext.ModelState.IsValid)
+        {
+            <div class="validation-summary">
+                <div asp-validation-summary="All">
+                </div>
+            </div>
+        }
+        <form asp-action="Signup" method="post">
+            <div>
+                <label for="username">Username</label>
+            </div>
+            <input type="text" class="input-form" id="username" name="username" asp-for="Username" />
+            <div>
+                <label for="username">Email</label>
+            </div>
+            <input type="email" class="input-form" id="email" name="email" asp-for="Email" />
+            <div>
+                <label for="password">Password</label>
+            </div>
+            <input type="password" class="input-form" id="password" name="password" asp-for="Password" />
+            <div>
+                <label for="passwordConfirmation">Password Confirmation</label>
+            </div>
+            <input type="password" class="input-form" id="passwordConfirmation" name="passwordConfirmation" asp-for="PasswordConfirmation" />
+            <button  id="submit-signup" type="submit" disabled>Sign up</button>
+        </form>
+        <div class="flex-child">
+            <span class="light-label">By creating an account, you agree to our <a>Terms of Service</a> and <a>Privacy Policy.</a></span>
+        </div>
+    </main>
+    
+    <script src="@Url.Content("~/js/signup.js")" asp-append-version="true"></script>     
+</body>

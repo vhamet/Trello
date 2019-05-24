@@ -1,12 +1,39 @@
 ﻿@section Styles {
-    <link href="@Url.Content("~/css/home.css")" rel="stylesheet" type="text/css" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <link href="@Url.Content("~/css/home_authenticated.css")" rel="stylesheet" type="text/css" />
+    }
+    else
+    {
+        <link href="@Url.Content("~/css/home.css")" rel="stylesheet" type="text/css" />
+    }
 }
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="home">
-    <h1>Welcome to Trello !</h1>
-    <p>View my <a href="/Boards/Index">boards</a></p>
-</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="home">
+        <h1>Welcome to Trello !</h1>
+        <p>View my <a href="/Boards/Index">boards</a></p>
+    </div>
+}
+else
+{
+    <div id="home">
+        <h1>Log in to Trello</h1>
+        <p id="home-signup">
+            <a href="/Authentification/Signup">or create an account</a>
+        </p>
+        <p id="home-login-google">
+            <span class="icon"></span>
+            <span>Log in with Google</span>
+        </p>
+        <p id="home-login">
+            <a href="/Authentication/Login"><span class="">Log in with email and password</span></a>
+        </p>
+    </div>
+}
