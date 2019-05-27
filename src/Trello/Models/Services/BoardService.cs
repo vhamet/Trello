@@ -17,8 +17,30 @@ namespace Trello.Models
 
         public List<Board> GetAllBoards()
         {
-            var boards = db.tblBoard.ToList();
-            return boards;
+            try
+            {
+                var boards = db.tblBoard.ToList();
+                return boards;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                // return null;
+            }
+        }  
+
+        public List<Board> GetUserBoards(int idUser)
+        {
+            try
+            {
+                var boards = db.tblUserBoard.Where(ub => ub.UserId == idUser).Select(ub => ub.Board).ToList();
+                return boards;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                // return null;
+            }
         }  
 
         public Board CreateBoard(Board board)

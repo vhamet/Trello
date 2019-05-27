@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,17 +18,18 @@ namespace Trello.Controllers
         {
             context = tdb;
         }
-        
+
         public IActionResult Index()
         {
-            var data = new BoardService(context).GetAllBoards();
+            var idUser = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var data = new BoardService(context).GetUserBoards(idUser);
             return View("Boards", new BoardsViewModel(data));
         }
 
         [HttpPost]
         public JsonResult UpdateFavoriteAsync([FromBody] Board board)
         {
-            var success = new BoardService(context).UpdateIsFavorite(board.Id, board.isFavorite);
+            var success = new BoardService(context).UpdateIsFavorite(board.BoardId, board.isFavorite);
             return Json(success);
         }
 
@@ -37,5 +39,7 @@ namespace Trello.Controllers
             board = new BoardService(context).CreateBoard(board);
             return Json(board);
         }
+
+        
     }
 }

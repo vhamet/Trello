@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Trello.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         [StringLength(255)]
         public string Username { get; set; }
@@ -14,5 +15,7 @@ namespace Trello.Models
 
         [StringLength(255)]
         public string Password { get; set; }
+
+        public IList<UserBoard> UserBoards { get; set; }
     }
 }

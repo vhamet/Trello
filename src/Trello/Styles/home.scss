@@ -39,6 +39,7 @@
     line-height: 27px;
     cursor: pointer;
     width: 200px;
+    user-select: none;
 
     &:hover {
       background: rgba(255, 255, 255, 0.8);
@@ -52,7 +53,6 @@
       height: 25px;
       float: left;
       margin: 0 5px 0 15px;
-      display: inline-block;
     }
   }
 }

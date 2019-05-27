@@ -23,17 +23,11 @@ namespace Trello.Controllers
             return View(new LoginViewModel());
         }
 
-        private static bool IsUrlValid(string returnUrl)
-        {
-            return !string.IsNullOrWhiteSpace(returnUrl)
-                && Uri.IsWellFormedUriString(returnUrl, UriKind.Relative);
-        }
-
         private async Task LoginAsync(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Uri , user.Email)
             };

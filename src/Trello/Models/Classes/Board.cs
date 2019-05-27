@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Trello.Models
 {
     public class Board
     {
-        public int Id { get; set; }
+        public int BoardId { get; set; }
 
         [StringLength(255)]
         public string Name { get; set; }
@@ -28,5 +29,7 @@ namespace Trello.Models
                 return isFavorite ? "board-link-star-selected" : string.Empty;
             }
         }
+
+        public IList<UserBoard> UserBoards { get; set; }
     }
 }
