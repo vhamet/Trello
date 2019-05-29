@@ -30,6 +30,7 @@ namespace Trello.Models
             }
         }
 
-        public IList<UserBoard> UserBoards { get; set; }
+        public virtual IList<UserBoard> UserBoards { get; set; }
+        public virtual IList<List> Lists { get; set; }
     }
 }

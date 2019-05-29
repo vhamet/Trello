@@ -16,6 +16,6 @@ namespace Trello.Models
         [StringLength(255)]
         public string Password { get; set; }
 
-        public IList<UserBoard> UserBoards { get; set; }
+        public virtual IList<UserBoard> UserBoards { get; set; }
     }
 }

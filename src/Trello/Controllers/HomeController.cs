@@ -27,7 +27,7 @@ namespace Trello.Controllers
         {
             if (statusCode.HasValue)
             {
-                if (statusCode.Value == 404 || statusCode.Value == 500)
+                if (statusCode.Value == 401 || statusCode.Value == 404 || statusCode.Value == 500)
                 {
                     var viewName = statusCode.ToString();
                     return View(viewName);

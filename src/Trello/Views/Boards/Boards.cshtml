@@ -13,7 +13,7 @@
     <div id="boards-grid">
         @for (int i = 0; i < Model.Boards.Count; i++)
         {
-            <a class="board-link" href="/Board/">
+            <a class="board-link" href="/Boards/Board?id=@Model.Boards[i].BoardId">
                 <div class="board-link-content @Model.Boards[i].BackgroundClass">
                     <div>
                         @Model.Boards[i].Name

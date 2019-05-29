@@ -32,19 +32,17 @@ async function checkFieldAsync(field, value) {
   return used;
 }
 
-function checkField() {
+async function checkField() {
   if (this.value) {
-    checkFieldAsync(this.id, this.value)
-      .then((used) => {
-        if (used) {
-          this.classList.add('input-validation-error');
-          document.getElementById(`${this.id}Used`).style.display = 'block';
-        } else {
-          this.classList.remove('input-validation-error');
-          document.getElementById(`${this.id}Used`).style.display = 'none';
-        }
-        setSubmit();
-      });
+    const used = await checkFieldAsync(this.id, this.value);
+    if (used) {
+      this.classList.add('input-validation-error');
+      document.getElementById(`${this.id}Used`).style.display = 'block';
+    } else {
+      this.classList.remove('input-validation-error');
+      document.getElementById(`${this.id}Used`).style.display = 'none';
+    }
+    setSubmit();
   } else {
     this.classList.remove('input-validation-error');
     document.getElementById(`${this.id}Used`).style.display = 'none';

@@ -1,0 +1,57 @@
+@model Trello.Models.BoardViewModel
+@section Styles {
+    <link href="@Url.Content("~/css/board.css")" rel="stylesheet" type="text/css" />
+}
+@{
+    ViewData["Title"] = Model.Board.Name;
+}
+
+<div class="board-main">
+    <div class="board-header">
+        <div class="board-name">
+            <input type="text" id="board-name-update" value="@Model.Board.Name" data-id="@Model.Board.BoardId"/>
+            <input type="hidden" id="board-name-hidden" value="@Model.Board.Name"/>
+        </div>
+        <div class="board-link-star">
+            <div class="far fa-star @Model.Board.SelectedClass" data-id="@Model.Board.BoardId"></div> 
+        </div>
+    </div>
+    <div class="board-lists">
+        @foreach(var list in Model.Board.Lists)
+        {
+            <div class="drop-list" data-id="@list.ListId" data-position="@list.Position">
+                <div class="board-list edit-list grab-list">
+                    <div class="list-actions">
+                        <label class="label-title">@list.Title</label>
+                        <input type="text" class="edit-title hide" value="@list.Title" data-id="@list.ListId"> 
+                        <i class="fas fa-trash-alt delete-list" data-id="@list.ListId"></i>
+                    </div>
+                    @foreach(var card in list.Cards)
+                    {
+                        <div data-id="@list.ListId">@card.Title</div>
+                    }
+                </div>
+            </div>
+        }
+        <div id="add-list">
+            <div id="add-list-link" class="board-list">
+                <i class="fas fa-plus"></i>
+                <span>@(Model.Board.Lists.Count() > 0 ? "Add another list" : "Add a list")</span>
+            </div>
+            <div id="add-list-form" class="board-list edit-list hide">
+                <input type="text" id="add-list-title" data-id="@Model.Board.BoardId" placeholder="Enter list title..."/>
+                <div id="add-list-submit-container">
+                    <button id="add-list-submit">Add list</button>
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const backgroundClass = '@Model.Board.BackgroundClass';
+    </script>
+    <script src="@Url.Content("~/js/board.js")" asp-append-version="true"></script>
+}
