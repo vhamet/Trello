@@ -183,7 +183,6 @@ namespace Trello.Models
             }
         }
 
-
         public bool DeleteList(List list)
         {
             try
@@ -197,6 +196,78 @@ namespace Trello.Models
                 db.SaveChanges();  
 
                 return true;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                // return false;
+            }
+        }
+
+        public Card CreateCard(Card card) {
+            try
+            {
+                db.tblCard.Add(card);
+                db.SaveChanges();
+                
+                return card;
+            }
+            catch (Exception e)
+            {
+                throw e;
+                // return null;
+            }
+        }
+
+
+        public bool UpdateCardPosition(Card card)
+        {
+            try
+            {
+                var record = db.tblCard.Find(card.CardId);
+                if (record != null)
+                {
+                    record.ListId = card.ListId;
+                    record.Position = card.Position;
+                    return db.SaveChanges() == 1;
+                }
+
+                return false;   
+            }
+            catch (Exception e)
+            {
+                throw e;
+                // return false;
+            }
+        }
+
+        public bool UpdateCardTitle(Card card)
+        {
+            try
+            {
+                var record = db.tblCard.Find(card.CardId);
+                if (record != null)
+                {
+                    record.Title = card.Title;
+                    return db.SaveChanges() == 1;
+                }
+
+                return false;   
+            }
+            catch (Exception e)
+            {
+                throw e;
+                // return false;
+            }
+        }
+
+
+        public bool DeleteCard(Card card)
+        {
+            try
+            {
+                db.tblCard.Remove(card);
+                return db.SaveChanges() == 1;
             }
             catch (Exception e)
             {

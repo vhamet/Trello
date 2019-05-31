@@ -20,16 +20,41 @@
         @foreach(var list in Model.Board.Lists)
         {
             <div class="drop-list" data-id="@list.ListId" data-position="@list.Position">
-                <div class="board-list edit-list grab-list">
+                <div class="board-list edit-list grab-list @(list.Cards.Count() > 0 ? "" : "empty-list")">
                     <div class="list-actions">
-                        <label class="label-title">@list.Title</label>
+                        <span class="label-title">@list.Title</span>
                         <input type="text" class="edit-title hide" value="@list.Title" data-id="@list.ListId"> 
-                        <i class="fas fa-trash-alt delete-list" data-id="@list.ListId"></i>
+                        <span class="fas fa-trash-alt delete-list" data-id="@list.ListId"></span>
                     </div>
                     @foreach(var card in list.Cards)
                     {
-                        <div data-id="@list.ListId">@card.Title</div>
+                        <div class="drop-card" data-id="@card.CardId" data-position="@card.Position">
+                            <div class="card card-style grab-card">
+                                <div>
+                                    <span class="label-title-card">@card.Title</span>
+                                    <span class="fas fa-pencil-alt edit-card-icon action-card" data-id="@card.CardId"></span>
+                                    <span class="fas fa-trash-alt delete-card-icon action-card" data-id="@card.CardId"></span>
+                                </div>
+                            </div>
+                            <div class="edit-card hide">
+                                <input placeholder="Edit card title..." value="@card.Title" data-id="@card.CardId" />
+                            </div>
+                        </div>
                     }
+                    <div class="add-card">
+                        <div class="add-card-link">
+                            <i class="fas fa-plus"></i>
+                            <span>@(list.Cards.Count() > 0 ? "Add another card" : "Add a card")</span>
+                        </div>
+                        <div class="add-card-form add-form hide">
+                            <textarea class="add-card-title card-style" data-id="@list.ListId" rows="3" 
+                                placeholder="Enter a title for this card..."></textarea>
+                            <div>
+                                <button class="add-card-submit">Add card</button>
+                                <i class="fas fa-times add-card-close"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         }
@@ -38,7 +63,7 @@
                 <i class="fas fa-plus"></i>
                 <span>@(Model.Board.Lists.Count() > 0 ? "Add another list" : "Add a list")</span>
             </div>
-            <div id="add-list-form" class="board-list edit-list hide">
+            <div id="add-list-form" class="board-list edit-list add-form hide">
                 <input type="text" id="add-list-title" data-id="@Model.Board.BoardId" placeholder="Enter list title..."/>
                 <div id="add-list-submit-container">
                     <button id="add-list-submit">Add list</button>

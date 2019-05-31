@@ -32,8 +32,8 @@ namespace TrelloUnitTests
         {
            var data = new List<Board>
             {
-                new Board { Id = 1, isFavorite = false },
-                new Board { Id = 2, isFavorite = true },
+                new Board { BoardId = 1, isFavorite = false },
+                new Board { BoardId = 2, isFavorite = true },
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Board>>();
@@ -49,8 +49,8 @@ namespace TrelloUnitTests
             service.UpdateIsFavorite(1, true);
             service.UpdateIsFavorite(2, false);
 
-            Assert.True(data.First(b => b.Id == 1).isFavorite);
-            Assert.False(data.First(b => b.Id == 2).isFavorite);
+            Assert.True(data.First(b => b.BoardId == 1).isFavorite);
+            Assert.False(data.First(b => b.BoardId == 2).isFavorite);
         }
 
         [Fact]

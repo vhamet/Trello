@@ -13,5 +13,7 @@ namespace Trello.Models
 
         [StringLength(255)]
         public string Title { get; set; }
+
+        public int Position { get; set; }
     }
 }
