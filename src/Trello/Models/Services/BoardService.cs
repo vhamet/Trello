@@ -15,7 +15,7 @@ namespace Trello.Models
             db = context;
         }
 
-        public List<Board> GetAllBoards()
+        public List<Board> GetAll()
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Trello.Models
             }
         }
 
-        public Board GetBoard(int id)
+        public Board Get(int id)
         {
             try
             {
@@ -44,23 +44,9 @@ namespace Trello.Models
                 throw e;
                 // return null;
             }
-        }  
+        } 
 
-        public List<Board> GetUserBoards(int idUser)
-        {
-            try
-            {
-                var boards = db.tblUserBoard.Where(ub => ub.UserId == idUser).Select(ub => ub.Board).ToList();
-                return boards;
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return null;
-            }
-        }  
-
-        public Board CreateBoard(Board board)
+        public Board Create(Board board)
         {
             try
             {
@@ -96,7 +82,7 @@ namespace Trello.Models
             }
         }
 
-        public bool UpdateBoardName(Board board)
+        public bool UpdateName(Board board)
         {
             try
             {
@@ -108,166 +94,6 @@ namespace Trello.Models
                 }
 
                 return false;   
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-        public bool isAuthorized(int idUser, int idBoard)
-        {
-            try{
-                return db.tblUserBoard.Any(ub => ub.UserId == idUser && ub.BoardId == idBoard);
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-        public List CreateList(List list) {
-            try
-            {
-                db.tblList.Add(list);
-                db.SaveChanges();
-                
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return null;
-            }
-        }
-
-        public bool UpdateListTitle(List list)
-        {
-            try
-            {
-                var record = db.tblList.Find(list.ListId);
-                if (record != null)
-                {
-                    record.Title = list.Title;
-                    return db.SaveChanges() == 1;
-                }
-
-                return false;   
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-        public bool UpdateListPosition(List list)
-        {
-            try
-            {
-                var record = db.tblList.Find(list.ListId);
-                if (record != null)
-                {
-                    record.Position = list.Position;
-                    return db.SaveChanges() == 1;
-                }
-
-                return false;   
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-        public bool DeleteList(List list)
-        {
-            try
-            {
-                var cards = db.tblCard.Where(c => c.ListId == list.ListId);
-
-                foreach (var card in cards)
-                    db.tblCard.Remove(card);
-
-                db.tblList.Remove(list);
-                db.SaveChanges();  
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-        public Card CreateCard(Card card) {
-            try
-            {
-                db.tblCard.Add(card);
-                db.SaveChanges();
-                
-                return card;
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return null;
-            }
-        }
-
-
-        public bool UpdateCardPosition(Card card)
-        {
-            try
-            {
-                var record = db.tblCard.Find(card.CardId);
-                if (record != null)
-                {
-                    record.ListId = card.ListId;
-                    record.Position = card.Position;
-                    return db.SaveChanges() == 1;
-                }
-
-                return false;   
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-        public bool UpdateCardTitle(Card card)
-        {
-            try
-            {
-                var record = db.tblCard.Find(card.CardId);
-                if (record != null)
-                {
-                    record.Title = card.Title;
-                    return db.SaveChanges() == 1;
-                }
-
-                return false;   
-            }
-            catch (Exception e)
-            {
-                throw e;
-                // return false;
-            }
-        }
-
-
-        public bool DeleteCard(Card card)
-        {
-            try
-            {
-                db.tblCard.Remove(card);
-                return db.SaveChanges() == 1;
             }
             catch (Exception e)
             {

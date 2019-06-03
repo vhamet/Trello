@@ -43,8 +43,8 @@ namespace Trello.Controllers
         {
             if (ModelState.IsValid)
             {
-                var (isValid, user) = await new UserService(context).ValidateUserCredentialsAsync(model.Username, model.Password);
-                if (isValid)
+                var user = new UserService(context).ValidateUserCredentials(model.Username, model.Password);
+                if (user != null)
                 {
                     await LoginAsync(user);
 
@@ -104,7 +104,7 @@ namespace Trello.Controllers
                     Email = model.Email,
                     Password = model.Password
                 };
-                user = new UserService(context).CreateUser(user);
+                user = new UserService(context).Create(user);
                 if (user != null)
                 {
                     await LoginAsync(user);

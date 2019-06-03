@@ -21,14 +21,14 @@ namespace Trello.Controllers
             context = tdb;
         }
 
-        private int IdUser()
+        private int GetLoggedUserId()
         {
             return int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
         }
 
         public IActionResult Index()
         {
-            var data = new BoardService(context).GetUserBoards(IdUser());
+            var data = new UserBoardService(context).GetUserBoards(GetLoggedUserId());
             return View("Boards", new BoardsViewModel(data));
         }
 
@@ -49,7 +49,7 @@ namespace Trello.Controllers
         {
             if (board != null)
             {
-                var success = new BoardService(context).UpdateBoardName(board);
+                var success = new BoardService(context).UpdateName(board);
                 return Json(success);
             }
 
@@ -61,7 +61,7 @@ namespace Trello.Controllers
         {
             if (board != null)
             {
-                board = new BoardService(context).CreateBoard(board);
+                board = new BoardService(context).Create(board);
                 return Json(board);
             }
 
@@ -70,9 +70,8 @@ namespace Trello.Controllers
 
         public IActionResult Board(int id)
         {
-            var service = new BoardService(context);
-            var board = service.GetBoard(id);
-            if (!service.isAuthorized(IdUser(), board.BoardId))
+            var board = new BoardService(context).Get(id);
+            if (!new UserBoardService(context).isAuthorized(GetLoggedUserId(), board.BoardId))
                 return Unauthorized();
 
             board.Lists = board.Lists.OrderBy(l => l.Position).ToList();
@@ -87,7 +86,7 @@ namespace Trello.Controllers
         {
             if (list != null)
             {
-                list = new BoardService(context).CreateList(list);
+                list = new ListService(context).Create(list);
                 return Json(list);
             }
 
@@ -99,7 +98,7 @@ namespace Trello.Controllers
         {
             if (list != null)
             {
-                var success = new BoardService(context).UpdateListTitle(list);
+                var success = new ListService(context).UpdateTitle(list);
                 return Json(success);
             }
 
@@ -111,7 +110,7 @@ namespace Trello.Controllers
         {
             if (list != null)
             {
-                var success = new BoardService(context).UpdateListPosition(list);
+                var success = new ListService(context).UpdatePosition(list);
                 return Json(success);
             }
 
@@ -123,7 +122,7 @@ namespace Trello.Controllers
         {
             if (list != null)
             {
-                var success = new BoardService(context).DeleteList(list);
+                var success = new ListService(context).Delete(list);
                 return Json(success);
             }
 
@@ -135,7 +134,7 @@ namespace Trello.Controllers
         {
             if (card != null)
             {
-                card = new BoardService(context).CreateCard(card);
+                card = new CardService(context).Create(card);
                 return Json(card);
             }
 
@@ -147,7 +146,7 @@ namespace Trello.Controllers
         {
             if (card != null)
             {
-                var success = new BoardService(context).UpdateCardPosition(card);
+                var success = new CardService(context).UpdatePosition(card);
                 return Json(success);
             }
 
@@ -159,7 +158,7 @@ namespace Trello.Controllers
         {
             if (card != null)
             {
-                var success = new BoardService(context).UpdateCardTitle(card);
+                var success = new CardService(context).UpdateTitle(card);
                 return Json(success);
             }
 
@@ -171,7 +170,7 @@ namespace Trello.Controllers
         {
             if (card != null)
             {
-                var success = new BoardService(context).DeleteCard(card);
+                var success = new CardService(context).Delete(card);
                 return Json(success);
             }
 

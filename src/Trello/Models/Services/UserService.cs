@@ -14,21 +14,21 @@ namespace Trello.Models
             db = context;
         }
 
-        public Task<(bool, User)> ValidateUserCredentialsAsync(string username, string password)
+        public User ValidateUserCredentials(string username, string password)
         {
             try{
                 var user = db.tblUser.FirstOrDefault(u => u.Username == username);
                 if (user != null && string.Equals(user.Password, password, StringComparison.Ordinal))
                 {
-                    return Task.FromResult((true, user));
+                    return user;
                 }
     
-                return Task.FromResult((false, user));
+                return null;
             }
             catch (Exception e)
             {
                 throw e;
-                // return Task.FromResult((false, (User)null));
+                // return null;
             }
         }
 
@@ -58,7 +58,7 @@ namespace Trello.Models
             }
         }
 
-        public User CreateUser(User user)
+        public User Create(User user)
         {
             try
             {
